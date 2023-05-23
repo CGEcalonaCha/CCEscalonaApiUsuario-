@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "GetAll";
+}
+
+<h2>Consumir Api</h2>
+<div class="form-group col-md-12">
+    <div class="text-hide">
+        <input class="btn btn-info" type="submit" value="Agregar" />
+    </div>
+</div>
+<div class=" row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    Nombre
+                </th>
+                <th class="text-center " scope="col">
+                    Correo
+                </th>
+                <th class="text-left" scope="col">
+                    Direccion
+                </th>
+                <th class="text-left" scope="col">
+                    Foto
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <tr>
+                <td class="text-center hidden">
+                    
+                </td>
+                <td class="text-center">
+
+                </td>
+                <td class="text-left">
+                  
+                </td>
+                <td class="text-left">
+                   
+                </td>
+            </tr>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group col-md-12">
+        <div class="text-right">
+            <input class="btn btn-danger" type="submit" value="Limpiar" />
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function GetUsuario() {
+        $.ajax({
+            type: 'GET',
+            url: 'https://randomuser.me/api/',
+            dataType: 'json',
+            success: function (result) {
+                var body = document.getElementsByTagName("body")[0];
+
+                // Crea un elemento <table> y un elemento <tbody>
+                var tabla = document.createElement("table");
+                var tblBody = document.createElement("tbody");
+
+                // Crea las celdas
+                for (var i = 0; i < 2; i++) {
+                    // Crea las hileras de la tabla
+                    var hilera = document.createElement("tr");
+
+                    for (var j = 0; j < 2; j++) {
+                        // Crea un elemento <td> y un nodo de texto, haz que el nodo de
+                        // texto sea el contenido de <td>, ubica el elemento <td> al final
+                        // de la hilera de la tabla
+                        var celda = document.createElement("td");
+                        var textoCelda = document.createTextNode("celda en la hilera " + i + ", columna " + j);
+                        celda.appendChild(textoCelda);
+                        hilera.appendChild(celda);
+                    }
+
+                    // agrega la hilera al final de la tabla (al final del elemento tblbody)
+                    tblBody.appendChild(hilera);
+                }
+
+                // posiciona el <tbody> debajo del elemento <table>
+                tabla.appendChild(tblBody);
+                // appends <table> into <body>
+                body.appendChild(tabla);
+                // modifica el atributo "border" de la tabla y lo fija a "2";
+                tabla.setAttribute("border", "2");
+                //$('#tblUsuario tbody')
+                //json = JSON.parse open(api_url).read
+                //user_data = json["results"].first["user"] # Admittedly a fragile way to get to the data we want
+
+                //gender = user_data["gender"]
+                //first_name = user_data["name"]["first"]
+                //last_name = user_data["name"]["last"]
+                //instant_messenger = user_data["username"]
+                //headshot_url = user_data["picture"]["large"]
+
+            },
+            error: function (ex) {
+                alert('Failed.' + ex);
+            }
+        });
+
+        function Limpiar() {
+            $('tblUsuario tbody')
+        }
+    }
+</script>
